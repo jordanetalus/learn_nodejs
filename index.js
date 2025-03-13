@@ -6,10 +6,19 @@ const app = express();
 const port = 3000;
 
 app.use(express.static('Public'));
+app.use(express.json());
+app.use(express.urlencoded({extended: true}));
 
 app.post('/form', (req,res) => {
     console.log(req.body);
-    res.send('formulaire traité !')
+    if(req.body.password=='123456'){
+        res.send('connexion reuissir!');
+    }
+    else
+    {
+        res.redirect('/fichier/html?mdpIncorrect=1');
+    }
+    
 });
 
 app.get('/',(req, res) =>{
